@@ -22,11 +22,12 @@ router.post('/register', (req, res) => {
     (err, result) => {
         if (err) {
         if (err.code === 'ER_DUP_ENTRY') {
-            return res.status(409).json({ error: 'email already exists' });
+            return res.status(409).json({ msg: 'Account already exists' });
         }
         return res.status(500).json({ error: 'database error' });
         }
-        return res.status(201).json({ msg: 'user created' });
+        const token = jwt.sign({ id: result.insertId }, SECRET_KEY, { expiresIn: '1h' });
+        return res.status(201).json({ token: "Token of the newly registered user", token });
     }
   );
 });
@@ -39,24 +40,15 @@ router.post('/login', (req, res) => {
 
   db.query('SELECT * FROM user WHERE email = ?', [email], (err, results) => {
     if (err)
-        return res.status(500).json({ error: 'database error' });
+        return res.status(500).json({ msg: 'database error' });
     if (results.length === 0)
-        return res.status(401).json({ error: 'invalid credentials' });
+        return res.status(401).json({ msg: 'invalid credentials' });
 
     const user = results[0];
     if (!bcrypt.compareSync(password, user.password))
-        return res.status(401).json({ error: 'invalid credentials' });
-
-    const token = jwt.sign({ id: user.id }, SECRET_KEY, { expiresIn: '2h' });
-
-    return res.status(200).json({
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        firstname: user.firstname,
-        created_at: user.created_at,
-        token: token
-    });
+        return res.status(401).json({ msg: 'invalid credentials' });
+    const token = jwt.sign({ id: user.id }, SECRET_KEY, { expiresIn: '1h' });
+    return res.status(200).json({ token: "Token of the newly logged in user", token });
   });
 });
 
