@@ -1,17 +1,17 @@
 {
-  "name": "b-web-200-lil-2-1-epytodo-eliott1.duchene",
+  "name": "epytodo",
   "version": "1.0.0",
-  "description": "Epytodo",
-  "main": "index.js",
+  "description": "A simple todo application built with Node.js and Express.",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EpitechPGEPromo2029/B-WEB-200-LIL-2-1-epytodo-eliott1.duchene.git"
+    "url": "https://github.com/EpitechPGEPromo2029/B-WEB-200-LIL-2-1-epytodo-eliott1.duchene.git"
   },
-  "author": "",
+  "author": "Eliott Duchene",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/EpitechPGEPromo2029/B-WEB-200-LIL-2-1-epytodo-eliott1.duchene/issues"
