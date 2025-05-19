@@ -1,23 +1,35 @@
 const db = require('../../config/db');
 
 exports.getAllTodos = (req, res) => {
-    db.query('SELECT * FROM todo', (err, results) => {
-    if (err)
-        return res.status(500).json({ msg: 'DB error' });
-    return res.status(200).json(results);
+  db.query('SELECT * FROM todo', (err, results) => {
+  if (err)
+    return res.status(500).json({ msg: 'DB error' });
+  if (results.length === 0)
+    return res.status(404).json({ msg: 'Todo not found' });
+  const todo = results;
+  for (let i = 0; i < todo.length; i++) {
+    todo[i].created_at = new Date(todo[i].created_at).toISOString().replace('T', ' ').replace('Z', '');
+    todo[i].due_time = new Date(todo[i].due_time).toISOString().replace('T', ' ').replace('Z', '');
+  }
+  return res.status(200).json(todo);
   });
 };
 
 exports.getTodoById = (req, res) => {
   const { id } = req.params;
   if (!id || isNaN(id))
-    return res.status(400).json({ msg: 'Bad parameters' });
+      return res.status(400).json({ msg: 'Bad parameters' });
+
   db.query('SELECT * FROM todo WHERE id = ?', [id], (err, results) => {
     if (err)
-      return res.status(500).json({ msg: 'DB error' });
+        return res.status(500).json({ msg: 'DB error' });
     if (results.length === 0)
-      return res.status(404).json({ msg: 'Todo not found' });
-    return res.status(200).json(results[0]);
+        return res.status(404).json({ msg: 'Todo not found' });
+    const todo = results[0];
+
+    todo.created_at = new Date(todo.created_at).toISOString().replace('T', ' ').replace('Z', '');
+    todo.due_time = new Date(todo.due_time).toISOString().replace('T', ' ').replace('Z', '');
+    return res.status(200).json(todo);
   });
 };
 
@@ -41,7 +53,16 @@ exports.createTodo = (req, res) => {
                 if (err) {
                     return res.status(500).json({ msg: 'DB error' });
                 }
-                return res.status(201).json({ id: result.insertId, title, description, due_time, user_id, status });
+                const insertId = result.insertId;
+                db.query('SELECT * FROM todo WHERE id = ?', [insertId], (err, results) => {
+                    if (err) {
+                        return res.status(500).json({ msg: 'DB error' });
+                    }
+                    const todo = results[0];
+                    todo.created_at = new Date(todo.created_at).toISOString().replace('T', ' ').replace('Z', '');
+                    todo.due_time = new Date(todo.due_time).toISOString().replace('T', ' ').replace('Z', '');
+                    return res.status(201).json(todo);
+                });
             }
         );
     });
@@ -61,7 +82,18 @@ exports.updateTodo = (req, res) => {
           return res.status(500).json({ msg: 'DB error' });
         if (results.length === 0)
           return res.status(404).json({ msg: 'Todo not found' });
-        return res.status(200).json({ id: id, title, description, due_time, user_id, status });
+        db.query('SELECT * FROM todo WHERE id = ?', [id], (err, result) => {
+            if (err) {
+                return res.status(500).json({ msg: 'DB error' });
+            }
+            if (result.length === 0) {
+                return res.status(404).json({ msg: 'Todo not found' });
+            }
+            const todo = result[0];
+            todo.created_at = new Date(todo.created_at).toISOString().replace('T', ' ').replace('Z', '');
+            todo.due_time = new Date(todo.due_time).toISOString().replace('T', ' ').replace('Z', '');
+            return res.status(201).json(todo);
+        });
     }
   );
 };
