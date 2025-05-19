@@ -1,0 +1,27 @@
+{
+  "name": "b-web-200-lil-2-1-epytodo-eliott1.duchene",
+  "version": "1.0.0",
+  "description": "Epytodo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EpitechPGEPromo2029/B-WEB-200-LIL-2-1-epytodo-eliott1.duchene.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EpitechPGEPromo2029/B-WEB-200-LIL-2-1-epytodo-eliott1.duchene/issues"
+  },
+  "homepage": "https://github.com/EpitechPGEPromo2029/B-WEB-200-LIL-2-1-epytodo-eliott1.duchene#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.14.1"
+  }
+}
