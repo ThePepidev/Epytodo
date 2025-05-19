@@ -106,24 +106,33 @@ All protected routes require a **valid JWT** in the Authorization header:
 
 Authorization: Bearer <your-token>
 ## 📬 API Routes
+
 ### 🔓 Auth
-    Method	Route	Auth	Description
-    POST	/register		Register a new user
-    POST	/login		Login and get token
+
+| Method | Route     | Auth | Description              |
+|--------|-----------|------|--------------------------|
+| POST   | /register |      | Register a new user      |
+| POST   | /login    |      | Login and get token      |
+
 ### 👤 Users
-    Method	Route	Auth	Description
-    GET	/user	✅	Get current user info
-    GET	/user/todos	✅	Get all todos of user
-    GET	/users/:id/email	✅	Get user info by ID/email
-    PUT	/users/:id	✅	Update user info
-    DELETE	/users/:id	✅	Delete user by ID
+
+| Method | Route            | Auth | Description                |
+|--------|------------------|------|----------------------------|
+| GET    | /user            | ✅   | Get current user info      |
+| GET    | /user/todos      | ✅   | Get all todos of user      |
+| GET    | /users/:id/email | ✅   | Get user info by ID/email  |
+| PUT    | /users/:id       | ✅   | Update user info           |
+| DELETE | /users/:id       | ✅   | Delete user by ID          |
+
 ### ✅ Todos
-    Method	Route	Auth	Description
-    GET	/todos	✅	Get all todos
-    GET	/todos/:id	✅	Get a todo by ID
-    POST	/todos	✅	Create a new todo
-    PUT	/todos/:id	✅	Update a todo
-    DELETE	/todos/:id	✅	Delete a todo
+
+| Method | Route        | Auth | Description         |
+|--------|--------------|------|---------------------|
+| GET    | /todos       | ✅   | Get all todos       |
+| GET    | /todos/:id   | ✅   | Get a todo by ID    |
+| POST   | /todos       | ✅   | Create a new todo   |
+| PUT    | /todos/:id   | ✅   | Update a todo       |
+| DELETE | /todos/:id   | ✅   | Delete a todo       |
 ## 🔄 Example JSON
 ### Register
 
