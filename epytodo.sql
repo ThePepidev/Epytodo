@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS todo (
     title VARCHAR(255) NOT NULL,
     description VARCHAR(255) NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    due_time DATETIME DEFAULT NOT NULL,
+    due_time DATETIME NOT NULL,
     user_id INT NOT NULL,
     status ENUM('not started', 'todo', 'in progress', 'done') DEFAULT 'not started',
     FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
