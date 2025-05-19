@@ -60,7 +60,7 @@ exports.updateTodo = (req, res) => {
           return res.status(500).json({ error: 'DB error' });
         if (results.length === 0)
           return res.status(404).json({ msg: 'Todo not found' });
-        return res.status(200).json({ id: result.insertId, title, description, due_time, user_id, status });
+        return res.status(200).json({ id: id, title, description, due_time, user_id, status });
     }
   );
 };
