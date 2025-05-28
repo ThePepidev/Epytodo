@@ -58,12 +58,12 @@
 
 **Your** .env file should contain:
 
-MYSQL_DATABASE=epytodo
-MYSQL_HOST=localhost
-MYSQL_USER=root
-MYSQL_ROOT_PASSWORD=yourpassword
-PORT=3000
-SECRET=yourJWTSecret
+    MYSQL_DATABASE=epytodo
+    MYSQL_HOST=localhost
+    MYSQL_USER=root
+    MYSQL_ROOT_PASSWORD=yourpassword
+    PORT=3000
+    SECRET=yourJWTSecret
 
 ## 🧠 Database Schema
 user table
